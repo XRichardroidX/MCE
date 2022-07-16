@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1091345643449",
+    "project_id": "mechatronics-app-52da8",
+    "storage_bucket": "mechatronics-app-52da8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1091345643449:android:e2084f55bd6af819ff2868",
+        "android_client_info": {
+          "package_name": "futo.mechatronics.com.m_c_e"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1091345643449-pucpd8t21fd718ejh85crt6sl9seutv6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAL-KlqxpKdd6wEkERBGR15DBiN5DCMI5g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1091345643449-pucpd8t21fd718ejh85crt6sl9seutv6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1091345643449-niq2u1bnmpu739a2q5kbp9dtkqmng558.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "futo.mechatronics.com.mCe"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
