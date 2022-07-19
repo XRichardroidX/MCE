@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:m_c_e/screens/chats/admin_chat_room.dart';
 import 'package:m_c_e/screens/chats/complaint_box.dart';
 import 'package:m_c_e/screens/chats/student_chat_zone.dart';
@@ -34,12 +35,11 @@ class MainChat extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 child: Center(
                   child: Text(
-                    "Complaint Box!",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    "Complaint Box!", style: GoogleFonts.cairo(
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                   ),
                   ),
                 ),
               ),
@@ -50,7 +50,7 @@ class MainChat extends StatelessWidget {
               onTap: (){
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => AdminChatRoom()),
+                  MaterialPageRoute(builder: (context) => AlertDialog(title: Text("You are not authorized as a Student to enter this chat room"),  ),),
                 );
               },
               child: Container(
@@ -61,12 +61,11 @@ class MainChat extends StatelessWidget {
                 height: MediaQuery.of(context).size.height/5,
                 width: MediaQuery.of(context).size.width,
                 child: Center(
-                  child: Text("Head of Office & Mechatronics Staffs",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  child: Text("     Head of Office \n                & \n Mechatronics Staffs",style: GoogleFonts.oxygen(
+                    color: Colors.white,
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold,
+                  ),
                   ),
                 ),
               ),
@@ -88,11 +87,11 @@ class MainChat extends StatelessWidget {
                 height: MediaQuery.of(context).size.height/5,
                 width: MediaQuery.of(context).size.width,
                 child: Center(
-                  child: Text("Student Zone",
-                    style: TextStyle(
+                  child: Text(
+                    "Student Zone",
+                    style: GoogleFonts.rubik(
                       color: Colors.white,
                       fontSize: 20,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),

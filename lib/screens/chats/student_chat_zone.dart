@@ -90,44 +90,41 @@ class _StudentChatZoneState extends State<StudentChatZone> {
             Container(
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(30),
                 color: Colors.blue,
               ),
-              child: Row(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(40),
-                    child: Image.network(
-                      Pix,
-                      height: 38,
-                      width: 38,
-                    ),
-                  ),
-                  SizedBox(width: 12,),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "$Name",
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                          Container(
-                            width: 175,
-                            child: Text(
-                              "$Complaint",
-                              style: TextStyle(
-                                fontSize: 20,
-                              ),
-                            ),
-                          )
-                        ],
+                      CircleAvatar(
+                        radius: 20.0,
+                        backgroundImage:
+                        NetworkImage(Pix),
+                        backgroundColor: Colors.transparent,
+                      ),
+                      SizedBox(width: 15,),
+                      Text(
+                        "$Name",
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
                       ),
                     ],
+                  ),
+                  SizedBox(
+                    height: 8.0,
+                  ),
+                  Container(
+                    width: 175,
+                    child: Text(
+                      "$Complaint",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -147,41 +144,38 @@ class _StudentChatZoneState extends State<StudentChatZone> {
                 color: Colors.green,
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: Row(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(40),
-                    child: Image.network(
-                      Pix,
-                      height: 38,
-                      width: 38,
-                    ),
-                  ),
-                  SizedBox(width: 12,),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "$Name",
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                          Container(
-                            width: 175,
-                            child: Text(
-                              "$Complaint",
-                              style: TextStyle(
-                                fontSize: 20,
-                              ),
-                            ),
-                          )
-                        ],
+                      CircleAvatar(
+                        radius: 20.0,
+                        backgroundImage:
+                        NetworkImage(Pix),
+                        backgroundColor: Colors.transparent,
+                      ),
+                      SizedBox(width: 15,),
+                      Text(
+                        "$Name",
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
                       ),
                     ],
+                  ),
+                  SizedBox(
+                    height: 8.0,
+                  ),
+                  Container(
+                    width: 175,
+                    child: Text(
+                      "$Complaint",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                      ),
+                    ),
                   ),
                 ],
               ),

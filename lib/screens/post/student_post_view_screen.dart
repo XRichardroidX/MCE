@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:photo_view/photo_view.dart';
 import 'package:video_player/video_player.dart';
 
 class StudentPostViewScreen extends StatefulWidget {
@@ -12,6 +14,7 @@ class StudentPostViewScreen extends StatefulWidget {
 class _StudentPostViewScreenState extends State<StudentPostViewScreen> {
   VideoPlayerController? vidController;
   String? videoUrl;
+  bool onTap = false;
 
 
   //Todo THis is a Stream Builder function that collects the real time data from the data base and sends it to the displayWhat'sUp function
@@ -39,132 +42,237 @@ class _StudentPostViewScreenState extends State<StudentPostViewScreen> {
   displayWhatsUp({required String SentBy, required String ProfileUrl, required String Message, required String Image, required String imgText, required String Video, required String vidText}){
     //If there is a Text Message then display the Text Message
     if(Message != null && Image == "null" && imgText == "null" && Video == "null" && vidText == "null"){
-      return Center(
-        child: Container(
-          padding: EdgeInsets.all(10.0),
-          margin: EdgeInsets.all(17.0),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20.0),
-            color: Colors.grey,
-          ),
-          child: Text(
-            "$Message",
-            style: TextStyle(
-              fontSize: 18,
-              color: Colors.white,
+      return Container(
+        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 8.0),
+        margin: EdgeInsets.symmetric(vertical: 17.0),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(0.0),
+          color: Colors.grey,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: EdgeInsets.all(5.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(14),
+              ),
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    radius: 30.0,
+                    backgroundImage:
+                    NetworkImage(ProfileUrl),
+                    backgroundColor: Colors.transparent,
+                  ),
+                  SizedBox(width: 20,),
+                  Text(
+                    "$SentBy",
+                    style: GoogleFonts.kanit(color: Colors.white, fontSize: 17,),
+                  ),
+                ],
+              ),
             ),
-          ),
+            SizedBox(height: 20,),
+            Text(
+              "$Message",
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.black,
+              ),
+            ),
+          ],
         ),
       );
     }
     //If there is a Image then display the Image with it's imgText
     if(Message == "null" && Image != null && imgText != null && Video == "null" && vidText == "null"){
-      return Center(
-        child: Container(
-          padding: EdgeInsets.all(10.0),
-          margin: EdgeInsets.all(17.0),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20.0),
-            color: Colors.grey,
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Text(
+      return Container(
+        padding: EdgeInsets.symmetric(vertical: 17.0),
+        margin: EdgeInsets.symmetric(vertical: 17.0),
+        decoration: BoxDecoration(
+          color: Colors.grey,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: EdgeInsets.all(5.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(14),
+              ),
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    radius: 30.0,
+                    backgroundImage:
+                    NetworkImage(ProfileUrl),
+                    backgroundColor: Colors.transparent,
+                  ),
+                  SizedBox(width: 20,),
+                  Text(
+                    "$SentBy",
+                    style: GoogleFonts.kanit(color: Colors.white, fontSize: 17,),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.all(5.0),
+              margin: EdgeInsets.all(12.0),
+              decoration: BoxDecoration(
+              ),
+              child: Text(
                 "$imgText",
                 style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.white,
+                  fontSize: 20,
+                  color: Colors.black,
                 ),
               ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height/2,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.0),
-                  image: DecorationImage(
-                    image: NetworkImage(
-                      "$Image",
+            ),
+            onTap
+            ?
+            InkWell(
+                child: Container(
+                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
+                    child: PhotoView(
+                      imageProvider: NetworkImage("$Image"),
+                    )
+                ),
+                onTap: () {
+                  setState(() {
+                    onTap = false;
+                  });
+                }
+            )
+            :
+            InkWell(
+                onTap: () {
+                  setState(() {
+                    onTap = true;
+                  });
+                },
+              child: Center(
+                child: Container(
+                  margin: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 20.0),
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height/2.5,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: NetworkImage(
+                        "$Image",
+                      ),
                     ),
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       );
     }
     //If there is a video then display the video with it's vidText
     if(Message == "null" && Image == "null" && imgText == "null" && Video != null && vidText != null){
       videoUrl = Video;
-      return Center(
+      return Container(
+        padding: EdgeInsets.symmetric(vertical: 17.0),
+        margin: EdgeInsets.symmetric(vertical: 17.0),
+        decoration: BoxDecoration(
+          color: Colors.grey,
+        ),
         child: vidController!.value.isInitialized
             ?
-        Container(
-          padding: EdgeInsets.all(10.0),
-          margin: EdgeInsets.all(17.0),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20.0),
-            color: Colors.grey,
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Text(
-                "$vidText",
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.white,
-                ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: EdgeInsets.all(5.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(14),
               ),
-              AspectRatio(
-                aspectRatio: vidController!.value.aspectRatio,
-                child: VideoPlayer(vidController!),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: Row(
                 children: [
-                  IconButton(
-                    onPressed: (){
-                      Duration currentPosition = vidController!.value.position;
-                      Duration targetPosition = currentPosition - const Duration(seconds: 10);
-                      vidController!.seekTo(targetPosition);
-                    },
-                    icon: Icon(Icons.skip_previous),
-                    color: Colors.white,
+                  CircleAvatar(
+                    radius: 30.0,
+                    backgroundImage:
+                    NetworkImage(ProfileUrl),
+                    backgroundColor: Colors.transparent,
                   ),
-                  IconButton(
-                    onPressed: (){
-                      setState(() {
-                        vidController!.value.isPlaying
-                            ?
-                        vidController!.pause()
-                            :
-                        vidController!.play();
-                      });
-                    },
-                    icon: Icon(vidController!.value.isPlaying ? Icons.pause : Icons.play_arrow,),
-                    color: Colors.white,
-                  ),
-                  IconButton(
-                    onPressed: (){
-                      setState(() {
-                        Duration currentPosition = vidController!.value.position;
-                        Duration targetPosition = currentPosition + const Duration(seconds: 10);
-                        vidController!.seekTo(targetPosition);
-                      });
-                    },
-                    icon: Icon(Icons.fast_forward),
-                    color: Colors.white,
+                  SizedBox(width: 20,),
+                  Text(
+                    "$SentBy",
+                    style: GoogleFonts.kanit(color: Colors.white, fontSize: 17,),
                   ),
                 ],
-              )
-            ],
-          ),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.all(5.0),
+              margin: EdgeInsets.all(12.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: Text(
+                "$SentBy",
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+            AspectRatio(
+              aspectRatio: vidController!.value.aspectRatio,
+              child: VideoPlayer(vidController!),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                  onPressed: (){
+                    Duration currentPosition = vidController!.value.position;
+                    Duration targetPosition = currentPosition - const Duration(seconds: 10);
+                    vidController!.seekTo(targetPosition);
+                  },
+                  icon: Icon(Icons.skip_previous),
+                  color: Colors.white,
+                ),
+                IconButton(
+                  onPressed: (){
+                    setState(() {
+                      vidController!.value.isPlaying
+                          ?
+                      vidController!.pause()
+                          :
+                      vidController!.play();
+                    });
+                  },
+                  icon: Icon(vidController!.value.isPlaying ? Icons.pause : Icons.play_arrow,),
+                  color: Colors.white,
+                ),
+                IconButton(
+                  onPressed: (){
+                    setState(() {
+                      Duration currentPosition = vidController!.value.position;
+                      Duration targetPosition = currentPosition + const Duration(seconds: 10);
+                      vidController!.seekTo(targetPosition);
+                    });
+                  },
+                  icon: Icon(Icons.fast_forward),
+                  color: Colors.white,
+                ),
+              ],
+            )
+          ],
         )
             :
         Container(
-          child: Center(child: CircularProgressIndicator(),),
+          child: Center(
+            //child: Text("",style: GoogleFonts.lobster(color: Colors.lightBlue),),
+          ),
         ),
       );
     }
@@ -183,7 +291,7 @@ class _StudentPostViewScreenState extends State<StudentPostViewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text("MCE Notification feeds")),
+        title: Center(child: Text("MCE Notification Feeds", style: GoogleFonts.kanit(fontSize: 24),)),
         elevation: 0.0,
       ),
       body: Container(
@@ -195,15 +303,10 @@ class _StudentPostViewScreenState extends State<StudentPostViewScreen> {
       ),
       floatingActionButton: FloatingActionButton
         (
-        child: Text(
-          "Click to\ncheck for\nVideo\nupdates!",
-          style: TextStyle(
-            fontSize: 7.0,
-          ),
-        ),
+        child: Icon(Icons.download),
         onPressed: ()
         {
-          vidController = VideoPlayerController.network(videoUrl!)..initialize().then((_){
+          vidController = VideoPlayerController.network("$videoUrl")..initialize().then((_){
             setState(() {});
           });
         },

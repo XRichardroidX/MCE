@@ -49,6 +49,10 @@ dependencies:
   uuid: ^3.0.6
   video_player: ^2.4.5
   file_picker: ^3.0.4
+  shared_preferences: ^2.0.15
+  google_fonts: ^3.0.1
+  flutter_native_splash: ^2.2.4
+  photo_view: ^0.14.0
 
 dev_dependencies:
   flutter_test:

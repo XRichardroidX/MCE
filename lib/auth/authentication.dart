@@ -11,11 +11,12 @@ import '../data_type/student_info.dart';
 import '../screens/athentication_screens/signin.dart';
 import '../screens/user_type/admin.dart';
 import '../screens/user_type/student.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthenticationClass {
 
 
-  late FirebaseAuth _auth;
+  FirebaseAuth _auth;
 
   AuthenticationClass(this._auth);
 
@@ -34,8 +35,7 @@ class AuthenticationClass {
   }) async {
     try {
       //Create Account for new User
-      UserCredential credentials = await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
+      UserCredential credentials = await _auth.createUserWithEmailAndPassword(email: email, password: password);
 
       String profilePics = await ConvertToStringAndDeployToStorage('Profile-Picture', imageFile, false);
 
@@ -52,10 +52,6 @@ class AuthenticationClass {
 
       await _firestore.collection('Users').doc(credentials.user!.uid).set(User.toJson(),);
 
-
-      //Verify new users e-mail
-      await sendEmailVerificationMessage(context);
-
       //Take New User to Signin Page
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
@@ -63,18 +59,24 @@ class AuthenticationClass {
         ),
       );
 
+      //Verify new users e-mail
+      await sendEmailVerificationMessage(context);
+
       if (!_auth.currentUser!.emailVerified) {
-        showSnackBar(context, "Verify your account with the link sent to you");
+        showSnackBar(context, "Verify your Email with the verification link sent to you");
       }
     }
-
     // If Error Occurs, Display the message on SnackBar
     on FirebaseAuthException catch (error) {
+
+      showSnackBar(context, error.message!);
       if (error.code == 'weak-password') {
         showSnackBar(context, "Your Mechatronics account password is weak");
       }
-      showSnackBar(context, error.message!);
+
     }
+
+
   }
 
 
@@ -153,3 +155,34 @@ class AuthenticationClass {
   }
 
 }
+
+
+//Todo Save Users Data in Device storage with the help of the shared Preferences Plugin
+
+// class SaveUserDetailsWithSharedPreferences{
+//
+//   static String displayUserNameKey = "NameKey";
+//   static String displayProfilePix = "ProfileUrlKey";
+//
+//   Future<bool> saveUserName(String getUserName) async {
+//     SharedPreferences preferences = await SharedPreferences.getInstance();
+//     return preferences.setString(displayUserNameKey, getUserName);
+// }
+//
+// Future<bool> saveUserProfileUrl(String getUserProfilePix) async {
+// SharedPreferences preferences = await SharedPreferences.getInstance();
+// return preferences.setString(displayProfilePix, getUserProfilePix);
+// }
+//
+// Future<String?> getUserName() async {
+//     SharedPreferences preferences = await SharedPreferences.getInstance();
+//     return preferences.getString(displayUserNameKey);
+// }
+//
+//   Future<String?> getUserProfilePix() async {
+//     SharedPreferences preferences = await SharedPreferences.getInstance();
+//     return preferences.getString(displayProfilePix);
+//   }
+//
+//
+// }

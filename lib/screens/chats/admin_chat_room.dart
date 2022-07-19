@@ -56,20 +56,30 @@ class _AdminChatRoomState extends State<AdminChatRoom> {
 
   addMessage(bool sendClicked) async {
 
-    if (messageController.text != null && ProfileUrl != null && MyUserName != null){
+    if (messageController.text != null){
 
       String _messageController = messageController.text;
       var MessageSentTime = await DateTime.now();
-
+      if(ProfileUrl == null){
+        ProfileUrl = "https://poly-ag.com/wp-content/uploads/2020/12/guest-user.jpg";
+      }
+      if(MyUserName == null){
+        MyUserName = "Loading...";
+      }
       Map<String, dynamic> messageData = await {
         "Message" : _messageController,
         "SentBy" : MyUserName,
         "Time" : MessageSentTime,
         "ProfileUrl" : ProfileUrl,
       };
+      print(_messageController);
+      print(MyUserName);
+      print(MessageSentTime);
+      print(ProfileUrl);
+      print(sendClicked);
 
       messageID = randomAlphaNumeric(19);
-
+      print(messageID);
       await Database().addMessagesToDatabase(messageID!, messageData);
 
       if(sendClicked){
@@ -90,45 +100,41 @@ class _AdminChatRoomState extends State<AdminChatRoom> {
               Container(
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(30),
                   color: Colors.black54,
                 ),
-                child: Row(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(40),
-                      child: Image.network(
-                        Pix,
-                        height: 38,
-                        width: 38,
-                      ),
-                    ),
-                    SizedBox(width: 12,),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                         Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                  "$Name",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              Container(
-                                width: 175,
-                                child: Text(
-                                  "$Complaint",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              )
-                            ],
+                        CircleAvatar(
+                          radius: 20.0,
+                          backgroundImage:
+                          NetworkImage(Pix),
+                          backgroundColor: Colors.transparent,
+                        ),
+                        SizedBox(width: 15,),
+                        Text(
+                          "$Name",
+                          style: TextStyle(
+                            color: Colors.white,
                           ),
+                        ),
                       ],
+                    ),
+                    SizedBox(
+                      height: 8.0,
+                    ),
+                    Container(
+                      width: 175,
+                      child: Text(
+                        "$Complaint",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -146,44 +152,40 @@ class _AdminChatRoomState extends State<AdminChatRoom> {
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
                 color: Colors.black38,
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(30),
               ),
-              child: Row(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(40),
-                    child: Image.network(
-                      Pix,
-                      height: 38,
-                      width: 38,
-                    ),
-                  ),
-                  SizedBox(width: 12,),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                              "$Name",
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                          Container(
-                            width: 175,
-                            child: Text(
-                              "$Complaint",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                              ),
-                            ),
-                          )
-                        ],
+                      CircleAvatar(
+                        radius: 20.0,
+                        backgroundImage:
+                        NetworkImage(Pix),
+                        backgroundColor: Colors.transparent,
+                      ),
+                      SizedBox(width: 12,),
+                      Text(
+                          "$Name",
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
                       ),
                     ],
+                  ),
+                      SizedBox(
+                        height: 8.0,
+                      ),
+                      Container(
+                        width: 175,
+                        child: Text(
+                          "$Complaint",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
+                        ),
                   ),
                 ],
               ),
@@ -264,8 +266,6 @@ class _AdminChatRoomState extends State<AdminChatRoom> {
                     GestureDetector(
                       onTap: (){
                         addMessage(true);
-                        messageController.text = "";
-                        messageID = null;
                         scrollController.animateTo(scrollController.position.maxScrollExtent, duration: Duration(milliseconds: 300), curve: Curves.easeOut);
                       },
                       child: Icon(

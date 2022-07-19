@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:m_c_e/screens/profile/admin_search_profile.dart';
 
 import '../athentication_screens/welcome.dart';
+import '../chats/admin_main_chat.dart';
 import '../chats/main_chat.dart';
 import '../post/admin_post_screen.dart';
 import '../user_type/admin.dart';
@@ -18,7 +19,7 @@ class WebScreenLayout extends StatefulWidget {
 class _WebScreenLayoutState extends State<WebScreenLayout> {
   final Screens = [
     AdminPostScreen(),
-    MainChat(),
+    AdminMainChat(),
     AdminSearchProfile(),
   ];
 

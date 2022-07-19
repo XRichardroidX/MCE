@@ -8,6 +8,7 @@ import 'package:m_c_e/screens/profile/student_profile_edit.dart';
 import 'package:m_c_e/screens/user_type/admin.dart';
 import 'package:m_c_e/screens/user_type/student.dart';
 
+import '../chats/admin_main_chat.dart';
 import '../post/admin_post_screen.dart';
 
 class MobileScreenLayout extends StatefulWidget {
@@ -21,7 +22,7 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
 
   final Screens = [
     AdminPostScreen(),
-    MainChat(),
+    AdminMainChat(),
     AdminSearchProfile(),
   ];
 

@@ -62,6 +62,9 @@ class _SignupPageState extends State<SignupPage> {
   }
 
   void signupUser() async {
+    if (_userNameController.text.trim() == null || _registrationNumberController.text.trim() == null || _levelController.text.trim() == null || _emailController.text.trim() == null || _passwordController.text.trim() == null || _profilePics == null) {
+      showSnackBar(context, "Fill the empty field");
+    }
     if (_passwordController1.text.trim() == _passwordController2.text.trim()) {
 
         _passwordController = _passwordController1;
@@ -74,17 +77,7 @@ class _SignupPageState extends State<SignupPage> {
           password: _passwordController.text.trim(),
           email: _emailController.text.trim(),
           imageFile: _profilePics!,
-
       );
-
-        @override
-        void dispose() {
-          super.dispose();
-          _passwordController.dispose();
-          _passwordController1.dispose();
-          _passwordController2.dispose();
-        }
-        dispose();
     }
     else {
         showSnackBar(context, "You typed in two different passwords");
@@ -96,6 +89,9 @@ class _SignupPageState extends State<SignupPage> {
   void dispose() {
     super.dispose();
     _emailController.dispose();
+    _passwordController.dispose();
+    _passwordController1.dispose();
+    _passwordController2.dispose();
   }
 
   @override
