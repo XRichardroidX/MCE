@@ -17,18 +17,15 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'database/database.dart';
 import 'firebase_options.dart';
 
-// ...
+
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash;
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(MainApp());
 }
-
-
-
 
 class MainApp extends StatelessWidget {
   MainApp({super.key});
@@ -52,26 +49,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  @override
-  void initState() {
-    super.initState();
-    initialization();
-  }
-
-  void initialization() async {
-    // This is where you can initialize the resources needed by your app while
-    // the splash screen is displayed.  Remove the following example because
-    // delaying the user experience is a bad design practice!
-    // ignore_for_file: avoid_print
-    Scaffold(body: Center(child: Text('ready in 3...'),),);
-    await Future.delayed(const Duration(seconds: 1));
-    Scaffold(body: Center(child: Text('ready in 2...'),),);
-    await Future.delayed(const Duration(seconds: 1));
-    Scaffold(body: Center(child: Text('ready in 1...'),),);
-    await Future.delayed(const Duration(seconds: 1));
-    Scaffold(body: Center(child: Text('Go...!'),),);
-    FlutterNativeSplash.remove();
-  }
 
   bool? verifiedEmail = FirebaseAuth.instance.currentUser?.emailVerified;
 

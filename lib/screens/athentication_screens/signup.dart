@@ -104,7 +104,7 @@ class _SignupPageState extends State<SignupPage> {
           elevation: 0,
           actions: [
            IconButton(
-              icon: Image.asset('assets/futo_logo.jpg'),
+              icon: Image.asset('assets/futo_logo.png'),
               onPressed: null,
             ),
          ],

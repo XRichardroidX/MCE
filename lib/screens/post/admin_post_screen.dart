@@ -485,7 +485,7 @@ class _AdminPostScreenState extends State<AdminPostScreen> {
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: Text(
-                "$SentBy",
+                "$vidText",
                 style: TextStyle(
                   fontSize: 20,
                   color: Colors.black,

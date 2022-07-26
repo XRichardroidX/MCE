@@ -50,7 +50,7 @@ class _SigninPageState extends State<SigninPage> {
         elevation: 0,
         actions: [
           IconButton(
-            icon: Image.asset('assets/futo_logo.jpg'),
+            icon: Image.asset('assets/futo_logo.png'),
             onPressed: null,
           ),
         ],

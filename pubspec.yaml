@@ -51,8 +51,12 @@ dependencies:
   file_picker: ^3.0.4
   shared_preferences: ^2.0.15
   google_fonts: ^3.0.1
-  flutter_native_splash: ^2.2.4
   photo_view: ^0.14.0
+  flutter_native_splash: ^2.2.6
+
+flutter_native_splash:
+  background_image: assets/roboto.png
+  image: assets/splash_screen_image.png
 
 dev_dependencies:
   flutter_test:
@@ -80,7 +84,7 @@ flutter:
   assets:
     - assets/
     - assets/welcome.jpg
-    - assets/futo_logo.jpg
+    - assets/futo_logo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
