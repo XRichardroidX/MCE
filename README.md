@@ -5,7 +5,7 @@
   <img src="assets/roboto.png" alt="logo" width="140"  height="auto" />
   <br/>
 
-  <h3><b>Mechatronics Project designed with FLutter/Dart</b></h3>
+  <h3><b>FUTO/Mechatronics Project designed with FLutter/Dart</b></h3>
 
 </div>
 
